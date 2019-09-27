@@ -1,0 +1,74 @@
+<Page navigatingTo="onNavigatingTo" class="page"
+    xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview" xmlns:sd="nativescript-ui-sidedrawer">
+    <ActionBar class="action-bar">
+        <NavigationButton tap="onBackButtonTap" android.systemIcon="ic_menu_back" />
+        <!-- <GridLayout columns="auto, *"> -->
+        <!-- <Label col="0" tap="toggleDrawer" class="fa action-bar-icon m-r-10" text="&#xf0c9;" /> -->
+        <Label class="action-bar-title" text="Список рахунків" horizontalAlignment="center"></Label>
+        <ActionItem tap="addLic" ios.systemIcon="3" android.systemIcon="ic_menu_add" ios.position="right"/>
+    </ActionBar>
+
+<sd:RadSideDrawer id="sideDrawer">
+
+        <!-- side drawer content -->
+        <sd:RadSideDrawer.drawerContent>
+            <StackLayout class="sidedrawer-left">
+                <StackLayout class="sidedrawer-header" height="auto">
+                            <Label row="1" text="{{ vname }}" textWrap="true" />
+                            <Label row="2" text="{{ address }}" textWrap="true" class="p-b-15"/>
+                </StackLayout>
+                <GridLayout rows="auto, auto, auto, auto, auto, auto, auto" columns="auto, *" class="sidedrawer-list">
+                    
+                    <Label row="0" col="0" text="&#xf0e4;" class="sidedrawer-icon fa" tap="{{ countersPage }}"/>
+                    <Label row="0" col="1" text="Лiчiльники" class="sidedrawer-text" tap="{{ countersPage }}"/>
+
+                    <Label row="1" col="0" text="&#xf2c3;" class="sidedrawer-icon fa" tap="{{ countersPage }}"/>
+                    <Label row="1" col="1" text="Стан рахунку" class="sidedrawer-text" tap="{{ balancePage }}"/>
+
+                    <Label row="2" col="0" text="&#xf09d;" class="sidedrawer-icon fa" tap="{{ countersPage }}"/>
+                    <Label row="2" col="1" text="Оплата" class="sidedrawer-text" tap="{{ paymentPage }}"/>
+
+                    <Label row="3" col="0" text="&#xf0f3;" class="sidedrawer-icon fa" tap="{{ countersPage }}"/>
+                    <Label row="3" col="1" text="Повідомлення" class="sidedrawer-text" tap="{{ notifyPage }}"/>
+
+                    <Label row="4" col="0" text="&#xf085;" class="sidedrawer-icon fa" tap="{{ countersPage }}"/>
+                    <Label row="4" col="1" text="Налаштування" class="sidedrawer-text" tap="{{ setPage }}"/>
+                                        
+                    <Label row="5" col="0" text="&#xf0e6;" class="sidedrawer-icon fa" tap="{{ countersPage }}"/>
+                    <Label row="5" col="1" text="Зворотній зв'язок" class="sidedrawer-text" tap="{{ feedbackPage }}"/>
+
+                    <Label row="6" col="0" text="&#xf08b;" class="sidedrawer-icon fa" tap="{{ countersPage }}"/>                 
+                    <Label row="6" col="1" text="Вихід" class="sidedrawer-text" tap="{{ logout }}"/>
+                </GridLayout>
+            </StackLayout>
+        </sd:RadSideDrawer.drawerContent>
+
+        <!-- The main content -->
+        <sd:RadSideDrawer.mainContent>
+            <StackLayout>
+        <ActivityIndicator width="50" marginTop="50%" busy="{{ isLoading }}" color="#154f9b" visibility="{{ isLoading ? 'visible' : 'collapse' }}" />
+        <GridLayout rows="*, auto" height="auto">
+        <ListView items="{{ items }}" itemTap="onItemTap"  height="auto" class="list-group">
+        <ListView.itemTemplate>
+            <StackLayout>
+                <Card:CardView class="cardStyle" margin="20" elevation="40" radius="15">
+                    <grid-layout rows="auto, auto, auto" columns="*, auto">
+                    <label row="0" text="{{ VNAME }}" class="ercode-item text-center" textWrap="true" colSpan="2" />
+                    <label row="1" text="{{ ERCODE }}" class="ercode-item text-center t-20" textWrap="true" colSpan="2" />
+                    </grid-layout>
+                </Card:CardView>
+            </StackLayout>
+        </ListView.itemTemplate>
+    </ListView>
+        <Label text="{{ message }}" visibility="{{ !isMessage ? 'visible' : 'collapse' }}"/>
+        <StackLayout row="1" height="5%">
+        <Label text="Комунальні платежі" class="footer-text"></Label>
+    </StackLayout>
+</GridLayout>
+</StackLayout>
+        </sd:RadSideDrawer.mainContent>
+
+    </sd:RadSideDrawer>
+
+</Page>
+
